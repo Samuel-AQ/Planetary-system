@@ -10,10 +10,8 @@ void setup() {
 
 void draw() {
   drawBackground();
-  //translate(, , 0);
-  rotateX(radians(xRotation));
-  rotateY(radians(yRotation));
   translate(mouseX, mouseY);
+  movePlanets();
   runSystem();
 }
 
@@ -23,7 +21,7 @@ void drawBackground() {
 }
 
 void create_planets() {
-  ifrit = new Planet(width * 0.1, width * 0.1, height / 2, 0);
+  ifrit = new Planet(width * 0.1, 0, height / 2, 0);
   sylph = new Planet(width * 0.02, width * 0.3, height / 2, 0); 
   bahamut = new Planet(width * 0.02, width * 0.38, height / 2, 0);
   titan = new Planet(width * 0.025, width * 0.47, height / 2, 0);
@@ -35,20 +33,31 @@ void create_planets() {
 }
 
 void runSystem() {
-  ifrit = new Planet(width * 0.1, width * 0.1, height / 2, 0);
-  sylph.movePlanet(ifrit.x, ifrit.z);
-  bahamut.movePlanet(ifrit.x, ifrit.z);
-  titan.movePlanet(ifrit.x, ifrit.z);
-  odin.movePlanet(ifrit.x, ifrit.z);
-  ramuh.movePlanet(ifrit.x, ifrit.z);
-  carbuncle.movePlanet(ifrit.x, ifrit.z);
-  shiva.movePlanet(ifrit.x, ifrit.z);
-  leviathan.movePlanet(ifrit.x, ifrit.z);
+  ifrit = new Planet(width * 0.1, 0, height / 2, 0);
+  if (yRotation <= 360) {
+    yRotation += 1;
+  } else {
+    yRotation -= 360;
+  }
+}
+
+void movePlanets() {
+  pushMatrix();
+  rotateY(radians(yRotation));
+  sylph.movePlanet(yRotation);
+  bahamut.movePlanet(yRotation);
+  titan.movePlanet(yRotation);
+  odin.movePlanet(yRotation);
+  ramuh.movePlanet(yRotation);
+  carbuncle.movePlanet(yRotation);
+  shiva.movePlanet(yRotation);
+  leviathan.movePlanet(yRotation);
+  popMatrix();
 }
 
 void keyPressed() {
   float rotationIncrement = 5;
-  
+
   if (keyCode == UP) {
     xRotation += rotationIncrement;
   }

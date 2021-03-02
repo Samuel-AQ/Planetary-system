@@ -29,32 +29,31 @@ public class Planet {
     popMatrix();
   }
 
-  protected void movePlanet(float starX, float starZ) {
-    float speedIncrement = 0.8;
+  protected void movePlanet(float rotation) {
+    //float speedIncrement = 0.8;
     
-    if (x >= starX && z >= starZ) {
-      x -= speedIncrement;
-      z += speedIncrement;
-    }
+    //if (x >= starX && z >= starZ) {
+    //  x -= speedIncrement;
+    //  z += speedIncrement;
+    //}
 
-    if (x <= starX && z >= starZ) {
-      x -= speedIncrement;
-      z -= speedIncrement;
-    }
+    //if (x <= starX && z >= starZ) {
+    //  x -= speedIncrement;
+    //  z -= speedIncrement;
+    //}
 
-    if (x <= starX && z <= starZ) {
-      x += speedIncrement;
-      z -= speedIncrement;
-    }
+    //if (x <= starX && z <= starZ) {
+    //  x += speedIncrement;
+    //  z -= speedIncrement;
+    //}
 
-    if (x >= starX && z <= starZ) {
-      x += speedIncrement;
-      z += speedIncrement;
-    }
+    //if (x >= starX && z <= starZ) {
+    //  x += speedIncrement;
+    //  z += speedIncrement;
+    //}
 
     pushMatrix();
     translate(x, y, z);
-    rotateX(PI/8);
     sphere(radius);
     popMatrix();
   }
