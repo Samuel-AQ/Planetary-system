@@ -1,4 +1,5 @@
 Planet ifrit, sylph, bahamut, titan, moon, odin, ramuh, carbuncle, shiva, leviathan;
+PImage ifritTexture, sylphTexture, bahamutTexture, titanTexture, moonTexture, odinTexture, ramuhTexture, carbuncleTexture, shivaTexture, leviathanTexture;
 float xRotation, yRotation, systemRotation;
 
 void setup() {
@@ -10,15 +11,28 @@ void setup() {
 }
 
 void createSystem() {
-  ifrit = new Planet(width * 0.2, 0, height / 2, 0);
-  sylph = new Planet(width * 0.05, width * 0.3, height / 2, 200); 
-  bahamut = new Planet(width * 0.05, width * -0.38 , height / 2, 150);
-  titan = new Planet(width * 0.055, width * -0.47, height / 2, 50);
-  odin = new Planet(width * 0.05, width * 0.55, height / 2, 80);
-  ramuh = new Planet(width * 0.06, width * -0.65, height / 2, 300);
-  carbuncle = new Planet(width * 0.04, width * 0.75, height / 2, 500);
-  shiva = new Planet(width * 0.045, width * -0.85, height / 2, 150);
-  leviathan = new Planet(width * 0.05, width * -0.95, height / 2, 800);
+  loadTextures();
+  ifrit = new Planet(width * 0.2, 0, height / 2, 0, ifritTexture);
+  sylph = new Planet(width * 0.05, width * 0.3, height / 2, 200, sylphTexture); 
+  bahamut = new Planet(width * 0.05, width * -0.38 , height / 2, 150, bahamutTexture);
+  titan = new Planet(width * 0.055, width * -0.47, height / 2, 50, titanTexture);
+  odin = new Planet(width * 0.05, width * 0.55, height / 2, 80, odinTexture);
+  ramuh = new Planet(width * 0.06, width * -0.65, height / 2, 300, ramuhTexture);
+  carbuncle = new Planet(width * 0.04, width * 0.75, height / 2, 500, carbuncleTexture);
+  shiva = new Planet(width * 0.045, width * -0.85, height / 2, 150, shivaTexture);
+  leviathan = new Planet(width * 0.05, width * -0.95, height / 2, 800, leviathanTexture);
+}
+
+void loadTextures(){
+  ifritTexture = loadImage("../data/textures/ifrit.png");
+  sylphTexture = loadImage("../data/textures/sylph.jpg");
+  bahamutTexture = loadImage("../data/textures/bahamut.jpg");
+  titanTexture = loadImage("../data/textures/titan.jpg");
+  odinTexture = loadImage("../data/textures/odin.jpg");
+  ramuhTexture = loadImage("../data/textures/ramuh.jpg");
+  carbuncleTexture = loadImage("../data/textures/carbuncle.jpg");
+  shivaTexture = loadImage("../data/textures/shiva.jpg");
+  leviathanTexture = loadImage("../data/textures/leviathan.jpg");
 }
 
 void draw() {
