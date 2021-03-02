@@ -47,14 +47,14 @@ void runSystem() {
 void movePlanets() {
   pushMatrix();
   rotateY(radians(systemRotation));
-  sylph.movePlanet(yRotation);
-  bahamut.movePlanet(yRotation);
-  titan.movePlanet(yRotation);
-  odin.movePlanet(yRotation);
-  ramuh.movePlanet(yRotation);
-  carbuncle.movePlanet(yRotation);
-  shiva.movePlanet(yRotation);
-  leviathan.movePlanet(yRotation);
+  sylph.updatePlanet();
+  bahamut.updatePlanet();
+  titan.updatePlanet();
+  odin.updatePlanet();
+  ramuh.updatePlanet();
+  carbuncle.updatePlanet();
+  shiva.updatePlanet();
+  leviathan.updatePlanet();
   popMatrix();
 }
 
