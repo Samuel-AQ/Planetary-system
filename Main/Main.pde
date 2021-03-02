@@ -15,7 +15,7 @@ void draw() {
   rotateX(radians(xRotation));
   rotateY(radians(yRotation));
   movePlanets();
-  runSystem();
+  updatePlanetsRotation();
 }
 
 void drawBackground() {
@@ -24,27 +24,19 @@ void drawBackground() {
 }
 
 void create_planets() {
-  ifrit = new Planet(width * 0.1, 0, height / 2, 0);
-  sylph = new Planet(width * 0.02, width * 0.3, height / 2, 200); 
-  bahamut = new Planet(width * 0.02, width * 0.38 * - 1, height / 2, 150);
-  titan = new Planet(width * 0.025, width * 0.47 * - 1, height / 2, 50);
-  odin = new Planet(width * 0.02, width * 0.55, height / 2, 80);
-  ramuh = new Planet(width * 0.04, width * 0.65 * - 1, height / 2, 300);
-  carbuncle = new Planet(width * 0.035, width * 0.75, height / 2, 500);
-  shiva = new Planet(width * 0.03, width * 0.85 * - 1, height / 2, 150);
-  leviathan = new Planet(width * 0.03, width * 0.95 * - 1, height / 2, 800);
-}
-
-void runSystem() {
-  ifrit = new Planet(width * 0.1, 0, height / 2, 0);
-  if (systemRotation <= 360) {
-    systemRotation += 1;
-  } else {
-    systemRotation -= 360;
-  }
+  ifrit = new Planet(width * 0.2, 0, height / 2, 0);
+  sylph = new Planet(width * 0.05, width * 0.3, height / 2, 200); 
+  bahamut = new Planet(width * 0.05, width * 0.38 * - 1, height / 2, 150);
+  titan = new Planet(width * 0.055, width * 0.47 * - 1, height / 2, 50);
+  odin = new Planet(width * 0.05, width * 0.55, height / 2, 80);
+  ramuh = new Planet(width * 0.06, width * 0.65 * - 1, height / 2, 300);
+  carbuncle = new Planet(width * 0.04, width * 0.75, height / 2, 500);
+  shiva = new Planet(width * 0.045, width * 0.85 * - 1, height / 2, 150);
+  leviathan = new Planet(width * 0.05, width * 0.95 * - 1, height / 2, 800);
 }
 
 void movePlanets() {
+  ifrit.updatePlanet();
   pushMatrix();
   rotateY(radians(systemRotation));
   sylph.updatePlanet();
@@ -56,6 +48,14 @@ void movePlanets() {
   shiva.updatePlanet();
   leviathan.updatePlanet();
   popMatrix();
+}
+
+void updatePlanetsRotation() {
+  if (systemRotation <= 360) {
+    systemRotation += 1;
+  } else {
+    systemRotation -= 360;
+  }
 }
 
 void keyPressed() {

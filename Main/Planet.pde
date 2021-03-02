@@ -8,12 +8,8 @@ public class Planet {
     this.y = y;
     this.z = z;
     this.radius = radius;
-
-    pushMatrix();
-    //fill(planetColor);
-    translate(x, y, z);
-    sphere(radius);
-    popMatrix();
+    
+    setPlanetPosition(this);
   }
 
   public Planet(float radius, float x, float y, float z, ArrayList<Planet> moons) {
@@ -22,17 +18,28 @@ public class Planet {
     this.z = z;
     this.radius = radius;
     this.moons = moons;
-
-    pushMatrix();
-    translate(x, y, z);
-    sphere(radius);
-    popMatrix();
+    
+    setPlanetPosition(this);
   }
+  
 
   protected void updatePlanet() {
+    setPlanetPosition(this);
+    updateMoons();
+  }
+
+  private void updateMoons() {
+    if (moons != null) {
+      for (Planet moon : moons) {
+        setPlanetPosition(moon);
+      }
+    }
+  }
+  
+  private void setPlanetPosition(Planet target){
     pushMatrix();
-    translate(x, y, z);
-    sphere(radius);
+    translate(target.x, target.y, target.z);
+    sphere(target.radius);
     popMatrix();
   }
 }
