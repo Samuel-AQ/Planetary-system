@@ -1,10 +1,10 @@
 Planet ifrit, sylph, bahamut, titan, moon, odin, ramuh, carbuncle, shiva, leviathan;
-PImage ifritTexture, sylphTexture, bahamutTexture, titanTexture, moonTexture, odinTexture, ramuhTexture, carbuncleTexture, shivaTexture, leviathanTexture;
+PImage backgroundImage, ifritTexture, sylphTexture, bahamutTexture, titanTexture, moonTexture, odinTexture, ramuhTexture, carbuncleTexture, shivaTexture, leviathanTexture;
 float xRotation, yRotation, systemRotation;
 
 void setup() {
   size(1000, 1000, P3D);
-  xRotation = 0;
+  xRotation = -15;
   yRotation = 0;
   systemRotation = 0;
   createSystem();
@@ -24,6 +24,7 @@ void createSystem() {
 }
 
 void loadTextures(){
+  backgroundImage = loadImage("../data/universe-background.jpg");
   ifritTexture = loadImage("../data/textures/ifrit.png");
   sylphTexture = loadImage("../data/textures/sylph.jpg");
   bahamutTexture = loadImage("../data/textures/bahamut.jpg");
@@ -36,7 +37,7 @@ void loadTextures(){
 }
 
 void draw() {
-  drawBackground();
+  background(backgroundImage);
   translate(width / 2, height / 8, width * -0.8);
   rotateX(radians(xRotation));
   rotateY(radians(yRotation));

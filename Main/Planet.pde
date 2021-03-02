@@ -12,7 +12,7 @@ public class Planet {
     this.radius = radius;
     this.texture = texture;
     
-    setPlanetPosition(this);
+    setPlanet(this);
   }
 
   public Planet(float radius, float x, float y, float z, PImage texture, ArrayList<Planet> moons) {
@@ -23,24 +23,24 @@ public class Planet {
     this.texture = texture;
     this.moons = moons;
     
-    setPlanetPosition(this);
+    setPlanet(this);
   }
   
 
   protected void updatePlanet() {
-    setPlanetPosition(this);
+    setPlanet(this);
     updateMoons();
   }
 
   private void updateMoons() {
     if (moons != null) {
       for (Planet moon : moons) {
-        setPlanetPosition(moon);
+        setPlanet(moon);
       }
     }
   }
   
-  private void setPlanetPosition(Planet target){
+  private void setPlanet(Planet target){
     pushMatrix();
     translate(target.x, target.y, target.z);
     target.shape = createShape(SPHERE, target.radius);
