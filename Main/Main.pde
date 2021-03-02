@@ -6,12 +6,24 @@ void setup() {
   xRotation = 0;
   yRotation = 0;
   systemRotation = 0;
-  create_planets();
+  createSystem();
+}
+
+void createSystem() {
+  ifrit = new Planet(width * 0.2, 0, height / 2, 0);
+  sylph = new Planet(width * 0.05, width * 0.3, height / 2, 200); 
+  bahamut = new Planet(width * 0.05, width * -0.38 , height / 2, 150);
+  titan = new Planet(width * 0.055, width * -0.47, height / 2, 50);
+  odin = new Planet(width * 0.05, width * 0.55, height / 2, 80);
+  ramuh = new Planet(width * 0.06, width * -0.65, height / 2, 300);
+  carbuncle = new Planet(width * 0.04, width * 0.75, height / 2, 500);
+  shiva = new Planet(width * 0.045, width * -0.85, height / 2, 150);
+  leviathan = new Planet(width * 0.05, width * -0.95, height / 2, 800);
 }
 
 void draw() {
   drawBackground();
-  translate(width / 2, height / 8, -800);
+  translate(width / 2, height / 8, width * -0.8);
   rotateX(radians(xRotation));
   rotateY(radians(yRotation));
   movePlanets();
@@ -21,18 +33,6 @@ void draw() {
 void drawBackground() {
   color black = color(0);
   background(black);
-}
-
-void create_planets() {
-  ifrit = new Planet(width * 0.2, 0, height / 2, 0);
-  sylph = new Planet(width * 0.05, width * 0.3, height / 2, 200); 
-  bahamut = new Planet(width * 0.05, width * 0.38 * - 1, height / 2, 150);
-  titan = new Planet(width * 0.055, width * 0.47 * - 1, height / 2, 50);
-  odin = new Planet(width * 0.05, width * 0.55, height / 2, 80);
-  ramuh = new Planet(width * 0.06, width * 0.65 * - 1, height / 2, 300);
-  carbuncle = new Planet(width * 0.04, width * 0.75, height / 2, 500);
-  shiva = new Planet(width * 0.045, width * 0.85 * - 1, height / 2, 150);
-  leviathan = new Planet(width * 0.05, width * 0.95 * - 1, height / 2, 800);
 }
 
 void movePlanets() {
