@@ -41,6 +41,7 @@ public class Planet {
   }
   
   private void setPlanet(Planet target){
+    //TODO: show target name and move it
     pushMatrix();
     translate(target.x, target.y, target.z);
     target.shape = createShape(SPHERE, target.radius);
