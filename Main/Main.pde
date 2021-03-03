@@ -8,21 +8,22 @@ void setup() {
   yRotation = 0;
   systemRotation = 0;
   
-  loadTextures();
   createSystem();
 }
 
 void createSystem() {
   //TODO: fix planet location
-  ifrit = new Planet(width * 0.2, 0, height / 2, 0, ifritTexture);
-  sylph = new Planet(width * 0.05, width * 0.3, height / 2, 0, sylphTexture); 
-  bahamut = new Planet(width * 0.05, width * -0.38 , height / 2, 0, bahamutTexture);
-  titan = new Planet(width * 0.055, width * -0.51, height / 2, 0, titanTexture);
-  odin = new Planet(width * 0.05, width * 0.55, height / 2, 0, odinTexture);
-  ramuh = new Planet(width * 0.06, width * -0.65, height / 2, 0, ramuhTexture);
-  carbuncle = new Planet(width * 0.04, width * 0.75, height / 2, 0, carbuncleTexture);
-  shiva = new Planet(width * 0.045, width * -0.85, height / 2, 0, shivaTexture);
-  leviathan = new Planet(width * 0.05, width * -0.95, height / 2, 0, leviathanTexture);
+  loadTextures();
+  
+  ifrit = new Planet("Ifrit", width * 0.2, 0, height / 2, 0, ifritTexture);
+  sylph = new Planet("Sylph", width * 0.05, width * 0.3, height / 2, 0, sylphTexture); 
+  bahamut = new Planet("Bahamut", width * 0.05, width * -0.38 , height / 2, 0, bahamutTexture);
+  titan = new Planet("Titan", width * 0.055, width * -0.51, height / 2, 0, titanTexture);
+  odin = new Planet("Odin", width * 0.05, width * 0.55, height / 2, 0, odinTexture);
+  ramuh = new Planet("Ramuh", width * 0.06, width * -0.65, height / 2, 0, ramuhTexture);
+  carbuncle = new Planet("Carbuncle", width * 0.04, width * 0.75, height / 2, 0, carbuncleTexture);
+  shiva = new Planet("Shiva", width * 0.045, width * -0.85, height / 2, 0, shivaTexture);
+  leviathan = new Planet("Leviathan", width * 0.05, width * -0.95, height / 2, 0, leviathanTexture);
 }
 
 void loadTextures(){

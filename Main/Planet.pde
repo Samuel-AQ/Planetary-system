@@ -1,11 +1,13 @@
 public class Planet {
+  String name;
   float x, y, z;
   ArrayList<Planet> moons;
   float radius;
   PImage texture;
   PShape shape;
 
-  public Planet(float radius, float x, float y, float z, PImage texture) {
+  public Planet(String name, float radius, float x, float y, float z, PImage texture) {
+    this.name = name;
     this.x = x;
     this.y = y;
     this.z = z;
@@ -15,7 +17,8 @@ public class Planet {
     setPlanet(this);
   }
 
-  public Planet(float radius, float x, float y, float z, PImage texture, ArrayList<Planet> moons) {
+  public Planet(String name, float radius, float x, float y, float z, PImage texture, ArrayList<Planet> moons) {
+    this.name = name;
     this.x = x;
     this.y = y;
     this.z = z;
