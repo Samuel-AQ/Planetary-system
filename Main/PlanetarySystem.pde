@@ -1,46 +1,31 @@
-public class PlanetarySystem {
+public class CelestialBodyarySystem {
 
-  ArrayList<Planet> planets;
-  Planet star;
+  ArrayList<CelestialBody> CelestialBodies;
+  CelestialBody star;
 
-  public PlanetarySystem(Planet star) {
+  public CelestialBodyarySystem(CelestialBody star) {
     this.star = star;
-    planets = new ArrayList<Planet>();
+    CelestialBodies = new ArrayList<CelestialBody>();
   }
 
-  protected void addPlanet(Planet planet) {
-    planets.add(planet);
+  protected void addCelestialBody(CelestialBody CelestialBody) {
+    CelestialBodies.add(CelestialBody);
   }
 
   protected int getSize() {
-    return planets.size();
+    return CelestialBodies.size();
   }
 
-  protected Planet getPlanet(String planetName) {
-    int position = -1;
-    for (Planet planet : planets) {
-      if (planet.name == planetName) {
-        position = planets.indexOf(planet);
-        break;
-      }
-    }
-    return planets.get(position);
-  }
-
-  protected Planet getPlanet(int index) {
-    return planets.get(index);
-  }
-
-  protected void movePlanets() {
+  protected void moveCelestialBodies() {
     updateStar();
 
     rotateY(radians(systemRotation));
-    for (Planet planet : planets) {
-      planet.updatePlanet();
-    } 
+    for (CelestialBody CelestialBody : CelestialBodies) {
+      CelestialBody.updateCelestialBody();
+    }
   }
-  
-  private void updateStar(){
+
+  private void updateStar() {
     pushMatrix();
     translate(star.x, star.y, star.z);
     star.shape = createShape(SPHERE, star.radius);

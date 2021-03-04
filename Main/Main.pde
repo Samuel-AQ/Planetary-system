@@ -3,7 +3,7 @@
  * @version: 04/03/2021
  */
 
-PlanetarySystem system;
+CelestialBodyarySystem system;
 PImage backgroundImage;
 float xRotation, yRotation, systemRotation, viewAngle;
 boolean showLegend;
@@ -31,35 +31,35 @@ void createSystem() {
   PImage shivaMoonTexture = loadImage("../data/textures/shivaMoon.jpg");
   PImage leviathanTexture = loadImage("../data/textures/leviathan.jpg");
 
-  Planet ifrit = new Planet("Ifrit", width * 0.2, 0, height / 2, 0, ifritTexture);
-  Planet sylph = new Planet("Sylph", width * 0.05, 0, height / 2, 300, sylphTexture); 
-  Planet bahamut = new Planet("Bahamut", width * 0.05, width * -0.38, height / 2, 400, bahamutTexture);
-  Planet titan = new Planet("Titan", width * 0.055, width * 0.2, height / 2, -500, titanTexture);
-  Planet odin = new Planet("Odin", width * 0.05, width * 0.55, height / 2, 650, odinTexture);
-  Planet ramuh = new Planet("Ramuh", width * 0.06, width * -0.65, height / 2, 750, ramuhTexture);
-  Planet carbuncle = new Planet("Carbuncle", width * 0.04, width * 0.75, height / 2, -800, carbuncleTexture);
-  Planet shivaMoon = new Planet("ShivaMoon", width * 0.018, width * -0.97, height / 2, -900, shivaMoonTexture);
-  Planet shiva = new Planet("Shiva", width * 0.045, width * -0.85, height / 2, -900, shivaTexture, shivaMoon);
-  Planet leviathan = new Planet("Leviathan", width * 0.05, width * -0.95, height / 2, 950, leviathanTexture);
+  CelestialBody ifrit = new CelestialBody("Ifrit", width * 0.2, 0, height / 2, 0, ifritTexture);
+  CelestialBody sylph = new CelestialBody("Sylph", width * 0.05, 0, height / 2, 300, sylphTexture); 
+  CelestialBody bahamut = new CelestialBody("Bahamut", width * 0.05, width * -0.38, height / 2, 400, bahamutTexture);
+  CelestialBody titan = new CelestialBody("Titan", width * 0.055, width * 0.2, height / 2, -500, titanTexture);
+  CelestialBody odin = new CelestialBody("Odin", width * 0.05, width * 0.55, height / 2, 650, odinTexture);
+  CelestialBody ramuh = new CelestialBody("Ramuh", width * 0.06, width * -0.65, height / 2, 750, ramuhTexture);
+  CelestialBody carbuncle = new CelestialBody("Carbuncle", width * 0.04, width * 0.75, height / 2, -800, carbuncleTexture);
+  CelestialBody shivaMoon = new CelestialBody("ShivaMoon", width * 0.018, width * -0.97, height / 2, -900, shivaMoonTexture);
+  CelestialBody shiva = new CelestialBody("Shiva", width * 0.045, width * -0.85, height / 2, -900, shivaTexture, shivaMoon);
+  CelestialBody leviathan = new CelestialBody("Leviathan", width * 0.05, width * -0.95, height / 2, 950, leviathanTexture);
 
-  system = new PlanetarySystem(ifrit);
+  system = new CelestialBodyarySystem(ifrit);
 
-  system.addPlanet(sylph);
-  system.addPlanet(bahamut);
-  system.addPlanet(titan);
-  system.addPlanet(odin);
-  system.addPlanet(ramuh);
-  system.addPlanet(carbuncle);
-  system.addPlanet(shiva);
-  system.addPlanet(leviathan);
+  system.addCelestialBody(sylph);
+  system.addCelestialBody(bahamut);
+  system.addCelestialBody(titan);
+  system.addCelestialBody(odin);
+  system.addCelestialBody(ramuh);
+  system.addCelestialBody(carbuncle);
+  system.addCelestialBody(shiva);
+  system.addCelestialBody(leviathan);
 }
 
 void draw() {
   background(backgroundImage);
   showInfo();
-  if (showLegend) drawPlanetsNames();
+  if (showLegend) drawCelestialBodysNames();
   updateMovements();
-  system.movePlanets();
+  system.moveCelestialBodies();
 }
 
 
@@ -82,12 +82,12 @@ void updateMovements() {
   }
 }
 
-void drawPlanetsNames() {
+void drawCelestialBodysNames() {
   float y = height * 0.005;
 
   textSize(20);
   // Star name
-  Planet star = system.star;
+  CelestialBody star = system.star;
   float adaptedRadius = star.radius * 0.08;
   text(star.name, 30, y += 35);
   pushMatrix();
@@ -98,14 +98,14 @@ void drawPlanetsNames() {
   shape(shape);
   popMatrix();
 
-  // Planets names
-  for (Planet planet : system.planets) {
-    adaptedRadius = planet.radius * 0.25;
-    text(planet.name, 30, y += 35);
+  // CelestialBodys names
+  for (CelestialBody CelestialBody : system.CelestialBodies) {
+    adaptedRadius = CelestialBody.radius * 0.25;
+    text(CelestialBody.name, 30, y += 35);
     pushMatrix();
     translate(150, y - 5);
     shape = createShape(SPHERE, adaptedRadius);
-    shape.setTexture(planet.texture);
+    shape.setTexture(CelestialBody.texture);
     shape.setStroke(false);
     shape(shape);
     popMatrix();

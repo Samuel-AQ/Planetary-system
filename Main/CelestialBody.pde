@@ -1,12 +1,12 @@
-public class Planet {
+public class CelestialBody {
   String name;
   float x, y, z;
-  Planet moon;
+  CelestialBody moon;
   float radius, angle;
   PImage texture;
   PShape shape;
 
-  public Planet(String name, float radius, float x, float y, float z, PImage texture) {
+  public CelestialBody(String name, float radius, float x, float y, float z, PImage texture) {
     this.name = name;
     this.x = x;
     this.y = y;
@@ -15,10 +15,10 @@ public class Planet {
     this.texture = texture;
     this.angle = 0;
 
-    setPlanet(this);
+    setCelestialBody(this);
   }
 
-  public Planet(String name, float radius, float x, float y, float z, PImage texture, Planet moon) {
+  public CelestialBody(String name, float radius, float x, float y, float z, PImage texture, CelestialBody moon) {
     this.name = name;
     this.x = x;
     this.y = y;
@@ -29,15 +29,15 @@ public class Planet {
     this.angle = 0;
     this.moon.angle = -500;
 
-    setPlanet(this);
+    setCelestialBody(this);
   }
 
 
-  protected void updatePlanet() {
-    setPlanet(this);
+  protected void updateCelestialBody() {
+    setCelestialBody(this);
   }
-  
-  private void setPlanet(Planet target) {
+
+  private void setCelestialBody(CelestialBody target) {
     pushMatrix();
     translate(target.x, target.y, target.z);
     updateAngle();
