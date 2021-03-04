@@ -1,11 +1,12 @@
 ////TODO:
 //moons
-//control info
-//readme
-//javadoc
+/**
+* @author: Samuel Arrocha Quevedo
+* @version: 04/03/2021
+*/
 PlanetarySystem system;
 PImage backgroundImage;
-float xRotation, yRotation, systemRotation;
+float xRotation, yRotation, systemRotation, viewAngle;
 boolean showLegend;
 
 void setup() {
@@ -13,13 +14,13 @@ void setup() {
   xRotation = -15;
   yRotation = 0;
   systemRotation = 0;
+  viewAngle = width * -0.9;
   backgroundImage = loadImage("../data/universe-background.jpg");
   showLegend = false;
   createSystem();
 }
 
 void createSystem() {
-  //TODO: fix planet location
   PImage ifritTexture = loadImage("../data/textures/ifrit.png");
   PImage sylphTexture = loadImage("../data/textures/sylph.jpg");
   PImage bahamutTexture = loadImage("../data/textures/bahamut.jpg");
@@ -63,11 +64,13 @@ void draw() {
 
 void showInfo() {
   textSize(20);
-  text("Pulse 'L' para mostrar u ocultar la leyenda", 30, height - 30);
+  text("· Use la rueda del ratón para ajustar el zoom sobre el sistema", 30, height - 90);
+  text("· Pulse las teclas de dirección para rotar el sistema", 30, height - 60);
+  text("· Pulse 'L' para mostrar u ocultar la leyenda", 30, height - 30);
 }
 
 void updateMovements() {
-  translate(width / 2, height / 8, width * -0.9);
+  translate(width / 2, height / 8, viewAngle);
   rotateX(radians(xRotation));
   rotateY(radians(yRotation));
 
@@ -93,6 +96,10 @@ void drawPlanetsNames() {
     shape(shape);
     popMatrix();
   }
+}
+
+void mouseWheel(MouseEvent event){
+    viewAngle -= event.getCount() * 50;
 }
 
 void keyPressed() {
