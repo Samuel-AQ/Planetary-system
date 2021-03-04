@@ -13,7 +13,7 @@ public class Planet {
     this.z = z;
     this.radius = radius;
     this.texture = texture;
-    
+
     setPlanet(this);
   }
 
@@ -25,10 +25,10 @@ public class Planet {
     this.radius = radius;
     this.texture = texture;
     this.moons = moons;
-    
+
     setPlanet(this);
   }
-  
+
 
   protected void updatePlanet() {
     setPlanet(this);
@@ -42,8 +42,8 @@ public class Planet {
       }
     }
   }
-  
-  private void setPlanet(Planet target){
+
+  private void setPlanet(Planet target) {
     //TODO: show target name and move it
     pushMatrix();
     translate(target.x, target.y, target.z);
@@ -52,5 +52,9 @@ public class Planet {
     target.shape.setStroke(false);
     shape(target.shape);
     popMatrix();
+  }
+
+  protected void showPlanetName() {
+    text(name, x, y, z);
   }
 }

@@ -1,55 +1,71 @@
-Planet ifrit, sylph, bahamut, titan, moon, odin, ramuh, carbuncle, shiva, leviathan;
-PImage backgroundImage, ifritTexture, sylphTexture, bahamutTexture, titanTexture, moonTexture, odinTexture, ramuhTexture, carbuncleTexture, shivaTexture, leviathanTexture;
+PlanetarySystem system;
+PImage backgroundImage;
 float xRotation, yRotation, systemRotation;
+boolean showLegend;
 
 void setup() {
   size(1000, 1000, P3D);
   xRotation = -15;
   yRotation = 0;
   systemRotation = 0;
-  
+  backgroundImage = loadImage("../data/universe-background.jpg");
+  showLegend = false;
   createSystem();
 }
 
 void createSystem() {
   //TODO: fix planet location
-  loadTextures();
-  
-  ifrit = new Planet("Ifrit", width * 0.2, 0, height / 2, 0, ifritTexture);
-  sylph = new Planet("Sylph", width * 0.05, width * 0.3, height / 2, 0, sylphTexture); 
-  bahamut = new Planet("Bahamut", width * 0.05, width * -0.38 , height / 2, 0, bahamutTexture);
-  titan = new Planet("Titan", width * 0.055, width * -0.51, height / 2, 0, titanTexture);
-  odin = new Planet("Odin", width * 0.05, width * 0.55, height / 2, 0, odinTexture);
-  ramuh = new Planet("Ramuh", width * 0.06, width * -0.65, height / 2, 0, ramuhTexture);
-  carbuncle = new Planet("Carbuncle", width * 0.04, width * 0.75, height / 2, 0, carbuncleTexture);
-  shiva = new Planet("Shiva", width * 0.045, width * -0.85, height / 2, 0, shivaTexture);
-  leviathan = new Planet("Leviathan", width * 0.05, width * -0.95, height / 2, 0, leviathanTexture);
-}
+  PImage ifritTexture = loadImage("../data/textures/ifrit.png");
+  PImage sylphTexture = loadImage("../data/textures/sylph.jpg");
+  PImage bahamutTexture = loadImage("../data/textures/bahamut.jpg");
+  PImage titanTexture = loadImage("../data/textures/titan.jpg");
+  PImage odinTexture = loadImage("../data/textures/odin.jpg");
+  PImage ramuhTexture = loadImage("../data/textures/ramuh.jpg");
+  PImage carbuncleTexture = loadImage("../data/textures/carbuncle.jpg");
+  PImage shivaTexture = loadImage("../data/textures/shiva.jpg");
+  PImage leviathanTexture = loadImage("../data/textures/leviathan.jpg");
 
-void loadTextures(){
-  backgroundImage = loadImage("../data/universe-background.jpg");
-  ifritTexture = loadImage("../data/textures/ifrit.png");
-  sylphTexture = loadImage("../data/textures/sylph.jpg");
-  bahamutTexture = loadImage("../data/textures/bahamut.jpg");
-  titanTexture = loadImage("../data/textures/titan.jpg");
-  odinTexture = loadImage("../data/textures/odin.jpg");
-  ramuhTexture = loadImage("../data/textures/ramuh.jpg");
-  carbuncleTexture = loadImage("../data/textures/carbuncle.jpg");
-  shivaTexture = loadImage("../data/textures/shiva.jpg");
-  leviathanTexture = loadImage("../data/textures/leviathan.jpg");
+  Planet ifrit = new Planet("Ifrit", width * 0.2, 0, height / 2, 0, ifritTexture);
+  Planet sylph = new Planet("Sylph", width * 0.05, width * 0.3, height / 2, 0, sylphTexture); 
+  Planet bahamut = new Planet("Bahamut", width * 0.05, width * -0.38, height / 2, 0, bahamutTexture);
+  Planet titan = new Planet("Titan", width * 0.055, width * -0.51, height / 2, 0, titanTexture);
+  Planet odin = new Planet("Odin", width * 0.05, width * 0.55, height / 2, 0, odinTexture);
+  Planet ramuh = new Planet("Ramuh", width * 0.06, width * -0.65, height / 2, 0, ramuhTexture);
+  Planet carbuncle = new Planet("Carbuncle", width * 0.04, width * 0.75, height / 2, 0, carbuncleTexture);
+  Planet shiva = new Planet("Shiva", width * 0.045, width * -0.85, height / 2, 0, shivaTexture);
+  Planet leviathan = new Planet("Leviathan", width * 0.05, width * -0.95, height / 2, 0, leviathanTexture);
+
+  system = new PlanetarySystem(ifrit);
+
+  system.addPlanet(sylph);
+  system.addPlanet(bahamut);
+  system.addPlanet(titan);
+  system.addPlanet(odin);
+  system.addPlanet(ramuh);
+  system.addPlanet(carbuncle);
+  system.addPlanet(shiva);
+  system.addPlanet(leviathan);
 }
 
 void draw() {
   background(backgroundImage);
+  showInfo();
+  if (showLegend) drawPlanetsNames();
   updateMovements();
-  movePlanets();
+  system.movePlanets();
+}
+
+
+void showInfo() {
+  textSize(20);
+  text("Pulse 'L' para mostrar u ocultar la leyenda", 30, height - 30);
 }
 
 void updateMovements() {
   translate(width / 2, height / 8, width * -0.8);
   rotateX(radians(xRotation));
   rotateY(radians(yRotation));
-  
+
   if (systemRotation <= 360) {
     systemRotation += 1;
   } else {
@@ -57,19 +73,21 @@ void updateMovements() {
   }
 }
 
-void movePlanets() {
-  ifrit.updatePlanet();
-  pushMatrix();
-  rotateY(radians(systemRotation));
-  sylph.updatePlanet();
-  bahamut.updatePlanet();
-  titan.updatePlanet();
-  odin.updatePlanet();
-  ramuh.updatePlanet();
-  carbuncle.updatePlanet();
-  shiva.updatePlanet();
-  leviathan.updatePlanet();
-  popMatrix();
+void drawPlanetsNames() {
+  float y = height * 0.005;
+
+  textSize(20);
+  for (Planet planet : system.planets) {
+    float adaptedRadius = planet.radius * 0.25;
+    text(planet.name, 30, y += 35);
+    pushMatrix();
+    translate(150, y - 5);
+    PShape shape = createShape(SPHERE, adaptedRadius);
+    shape.setTexture(planet.texture);
+    shape.setStroke(false);
+    shape(shape);
+    popMatrix();
+  }
 }
 
 void keyPressed() {
@@ -86,5 +104,8 @@ void keyPressed() {
   }
   if (keyCode == LEFT) {
     yRotation -= rotationIncrement;
+  }
+  if (keyCode == 'L' || keyCode == 'l') {
+    showLegend = !showLegend;
   }
 }
