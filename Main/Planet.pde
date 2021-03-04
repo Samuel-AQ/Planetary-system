@@ -36,7 +36,7 @@ public class Planet {
   protected void updatePlanet() {
     setPlanet(this);
   }
-
+  
   private void setPlanet(Planet target) {
     pushMatrix();
     translate(target.x, target.y, target.z);

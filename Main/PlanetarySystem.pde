@@ -32,11 +32,21 @@ public class PlanetarySystem {
   }
 
   protected void movePlanets() {
-    star.updatePlanet();
+    updateStar();
 
     rotateY(radians(systemRotation));
     for (Planet planet : planets) {
       planet.updatePlanet();
     } 
+  }
+  
+  private void updateStar(){
+    pushMatrix();
+    translate(star.x, star.y, star.z);
+    star.shape = createShape(SPHERE, star.radius);
+    star.shape.setTexture(star.texture);
+    star.shape.setStroke(false);
+    shape(star.shape);
+    popMatrix();
   }
 }

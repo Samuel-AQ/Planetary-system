@@ -1,6 +1,3 @@
-//TODO:
-// make shiva planetarySystem
-
 /**
  * @author: Samuel Arrocha Quevedo
  * @version: 04/03/2021
@@ -31,6 +28,7 @@ void createSystem() {
   PImage ramuhTexture = loadImage("../data/textures/ramuh.jpg");
   PImage carbuncleTexture = loadImage("../data/textures/carbuncle.jpg");
   PImage shivaTexture = loadImage("../data/textures/shiva.jpg");
+  PImage shivaMoonTexture = loadImage("../data/textures/shivaMoon.jpg");
   PImage leviathanTexture = loadImage("../data/textures/leviathan.jpg");
 
   Planet ifrit = new Planet("Ifrit", width * 0.2, 0, height / 2, 0, ifritTexture);
@@ -40,7 +38,7 @@ void createSystem() {
   Planet odin = new Planet("Odin", width * 0.05, width * 0.55, height / 2, 650, odinTexture);
   Planet ramuh = new Planet("Ramuh", width * 0.06, width * -0.65, height / 2, 750, ramuhTexture);
   Planet carbuncle = new Planet("Carbuncle", width * 0.04, width * 0.75, height / 2, -800, carbuncleTexture);
-  Planet shivaMoon = new Planet("ShivaMoon", width * 0.018, width * -0.97, height / 2, -900, shivaTexture);
+  Planet shivaMoon = new Planet("ShivaMoon", width * 0.018, width * -0.97, height / 2, -900, shivaMoonTexture);
   Planet shiva = new Planet("Shiva", width * 0.045, width * -0.85, height / 2, -900, shivaTexture, shivaMoon);
   Planet leviathan = new Planet("Leviathan", width * 0.05, width * -0.95, height / 2, 950, leviathanTexture);
 
