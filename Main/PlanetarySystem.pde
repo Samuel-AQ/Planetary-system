@@ -2,7 +2,7 @@ public class PlanetarySystem {
 
   ArrayList<Planet> planets;
   Planet star;
-  
+
   public PlanetarySystem(Planet star) {
     this.star = star;
     planets = new ArrayList<Planet>();
@@ -11,34 +11,32 @@ public class PlanetarySystem {
   protected void addPlanet(Planet planet) {
     planets.add(planet);
   }
-  
-  protected int getSize(){
+
+  protected int getSize() {
     return planets.size();
   }
 
   protected Planet getPlanet(String planetName) {
     int position = -1;
     for (Planet planet : planets) {
-      if (planet.name == planetName){
+      if (planet.name == planetName) {
         position = planets.indexOf(planet);
         break;
       }
     }
     return planets.get(position);
   }
-  
-  protected Planet getPlanet(int index){
+
+  protected Planet getPlanet(int index) {
     return planets.get(index);
   }
-  
-  protected void movePlanets(float systemRotation){
-  star.updatePlanet();
-  
-  pushMatrix();
-  rotateY(radians(systemRotation));
-  for (Planet planet : planets) {
-    planet.updatePlanet();
-  } 
-  popMatrix();
+
+  protected void movePlanets() {
+    star.updatePlanet();
+
+    rotateY(radians(systemRotation));
+    for (Planet planet : planets) {
+      planet.updatePlanet();
+    } 
   }
 }

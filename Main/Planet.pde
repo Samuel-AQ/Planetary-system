@@ -1,8 +1,8 @@
 public class Planet {
   String name;
   float x, y, z;
-  ArrayList<Planet> moons;
-  float radius;
+  Planet moon;
+  float radius, angle;
   PImage texture;
   PShape shape;
 
@@ -13,18 +13,21 @@ public class Planet {
     this.z = z;
     this.radius = radius;
     this.texture = texture;
+    this.angle = 0;
 
     setPlanet(this);
   }
 
-  public Planet(String name, float radius, float x, float y, float z, PImage texture, ArrayList<Planet> moons) {
+  public Planet(String name, float radius, float x, float y, float z, PImage texture, Planet moon) {
     this.name = name;
     this.x = x;
     this.y = y;
     this.z = z;
     this.radius = radius;
     this.texture = texture;
-    this.moons = moons;
+    this.moon = moon;
+    this.angle = 0;
+    this.moon.angle = -500;
 
     setPlanet(this);
   }
@@ -32,29 +35,31 @@ public class Planet {
 
   protected void updatePlanet() {
     setPlanet(this);
-    updateMoons();
-  }
-
-  private void updateMoons() {
-    if (moons != null) {
-      for (Planet moon : moons) {
-        setPlanet(moon);
-      }
-    }
   }
 
   private void setPlanet(Planet target) {
-    //TODO: show target name and move it
     pushMatrix();
     translate(target.x, target.y, target.z);
+    updateAngle();
     target.shape = createShape(SPHERE, target.radius);
     target.shape.setTexture(target.texture);
     target.shape.setStroke(false);
     shape(target.shape);
     popMatrix();
+
+    if (target.moon != null) {
+      pushMatrix();
+      translate(target.moon.x, target.moon.y, target.moon.z);
+      target.moon.shape = createShape(SPHERE, target.moon.radius);
+      target.moon.shape.setTexture(target.moon.texture);
+      target.moon.shape.setStroke(false);
+      shape(target.moon.shape);
+      popMatrix();
+    }
   }
 
-  protected void showPlanetName() {
-    text(name, x, y, z);
+  private void updateAngle() {
+    if (angle > 360) angle -= 360;
+    rotateY(radians(angle += 1));
   }
 }

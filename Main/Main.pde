@@ -1,9 +1,11 @@
-////TODO:
-//moons
+//TODO:
+// make shiva planetarySystem
+
 /**
-* @author: Samuel Arrocha Quevedo
-* @version: 04/03/2021
-*/
+ * @author: Samuel Arrocha Quevedo
+ * @version: 04/03/2021
+ */
+
 PlanetarySystem system;
 PImage backgroundImage;
 float xRotation, yRotation, systemRotation, viewAngle;
@@ -38,7 +40,8 @@ void createSystem() {
   Planet odin = new Planet("Odin", width * 0.05, width * 0.55, height / 2, 650, odinTexture);
   Planet ramuh = new Planet("Ramuh", width * 0.06, width * -0.65, height / 2, 750, ramuhTexture);
   Planet carbuncle = new Planet("Carbuncle", width * 0.04, width * 0.75, height / 2, -800, carbuncleTexture);
-  Planet shiva = new Planet("Shiva", width * 0.045, width * -0.85, height / 2, -900, shivaTexture);
+  Planet shivaMoon = new Planet("ShivaMoon", width * 0.018, width * -0.97, height / 2, -900, shivaTexture);
+  Planet shiva = new Planet("Shiva", width * 0.045, width * -0.85, height / 2, -900, shivaTexture, shivaMoon);
   Planet leviathan = new Planet("Leviathan", width * 0.05, width * -0.95, height / 2, 950, leviathanTexture);
 
   system = new PlanetarySystem(ifrit);
@@ -58,7 +61,7 @@ void draw() {
   showInfo();
   if (showLegend) drawPlanetsNames();
   updateMovements();
-  system.movePlanets(systemRotation);
+  system.movePlanets();
 }
 
 
@@ -85,12 +88,25 @@ void drawPlanetsNames() {
   float y = height * 0.005;
 
   textSize(20);
+  // Star name
+  Planet star = system.star;
+  float adaptedRadius = star.radius * 0.08;
+  text(star.name, 30, y += 35);
+  pushMatrix();
+  translate(150, y - 5);
+  PShape shape = createShape(SPHERE, adaptedRadius);
+  shape.setTexture(star.texture);
+  shape.setStroke(false);
+  shape(shape);
+  popMatrix();
+
+  // Planets names
   for (Planet planet : system.planets) {
-    float adaptedRadius = planet.radius * 0.25;
+    adaptedRadius = planet.radius * 0.25;
     text(planet.name, 30, y += 35);
     pushMatrix();
     translate(150, y - 5);
-    PShape shape = createShape(SPHERE, adaptedRadius);
+    shape = createShape(SPHERE, adaptedRadius);
     shape.setTexture(planet.texture);
     shape.setStroke(false);
     shape(shape);
@@ -98,8 +114,8 @@ void drawPlanetsNames() {
   }
 }
 
-void mouseWheel(MouseEvent event){
-    viewAngle -= event.getCount() * 50;
+void mouseWheel(MouseEvent event) {
+  viewAngle -= event.getCount() * 50;
 }
 
 void keyPressed() {
