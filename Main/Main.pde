@@ -1,3 +1,8 @@
+////TODO:
+//moons
+//control info
+//readme
+//javadoc
 PlanetarySystem system;
 PImage backgroundImage;
 float xRotation, yRotation, systemRotation;
@@ -26,14 +31,14 @@ void createSystem() {
   PImage leviathanTexture = loadImage("../data/textures/leviathan.jpg");
 
   Planet ifrit = new Planet("Ifrit", width * 0.2, 0, height / 2, 0, ifritTexture);
-  Planet sylph = new Planet("Sylph", width * 0.05, width * 0.3, height / 2, 0, sylphTexture); 
-  Planet bahamut = new Planet("Bahamut", width * 0.05, width * -0.38, height / 2, 0, bahamutTexture);
-  Planet titan = new Planet("Titan", width * 0.055, width * -0.51, height / 2, 0, titanTexture);
-  Planet odin = new Planet("Odin", width * 0.05, width * 0.55, height / 2, 0, odinTexture);
-  Planet ramuh = new Planet("Ramuh", width * 0.06, width * -0.65, height / 2, 0, ramuhTexture);
-  Planet carbuncle = new Planet("Carbuncle", width * 0.04, width * 0.75, height / 2, 0, carbuncleTexture);
-  Planet shiva = new Planet("Shiva", width * 0.045, width * -0.85, height / 2, 0, shivaTexture);
-  Planet leviathan = new Planet("Leviathan", width * 0.05, width * -0.95, height / 2, 0, leviathanTexture);
+  Planet sylph = new Planet("Sylph", width * 0.05, 0, height / 2, 300, sylphTexture); 
+  Planet bahamut = new Planet("Bahamut", width * 0.05, width * -0.38, height / 2, 400, bahamutTexture);
+  Planet titan = new Planet("Titan", width * 0.055, width * 0.2, height / 2, -500, titanTexture);
+  Planet odin = new Planet("Odin", width * 0.05, width * 0.55, height / 2, 650, odinTexture);
+  Planet ramuh = new Planet("Ramuh", width * 0.06, width * -0.65, height / 2, 750, ramuhTexture);
+  Planet carbuncle = new Planet("Carbuncle", width * 0.04, width * 0.75, height / 2, -800, carbuncleTexture);
+  Planet shiva = new Planet("Shiva", width * 0.045, width * -0.85, height / 2, -900, shivaTexture);
+  Planet leviathan = new Planet("Leviathan", width * 0.05, width * -0.95, height / 2, 950, leviathanTexture);
 
   system = new PlanetarySystem(ifrit);
 
@@ -52,7 +57,7 @@ void draw() {
   showInfo();
   if (showLegend) drawPlanetsNames();
   updateMovements();
-  system.movePlanets();
+  system.movePlanets(systemRotation);
 }
 
 
@@ -62,7 +67,7 @@ void showInfo() {
 }
 
 void updateMovements() {
-  translate(width / 2, height / 8, width * -0.8);
+  translate(width / 2, height / 8, width * -0.9);
   rotateX(radians(xRotation));
   rotateY(radians(yRotation));
 

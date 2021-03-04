@@ -31,7 +31,7 @@ public class PlanetarySystem {
     return planets.get(index);
   }
   
-  protected void movePlanets(){
+  protected void movePlanets(float systemRotation){
   star.updatePlanet();
   
   pushMatrix();
