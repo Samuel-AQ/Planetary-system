@@ -97,7 +97,7 @@ void drawCelestialBodysNames() {
   shape(shape);
   popMatrix();
 
-  // CelestialBodys names
+  // CelestialBodies names
   for (CelestialBody CelestialBody : system.CelestialBodies) {
     adaptedRadius = CelestialBody.radius * 0.25;
     text(CelestialBody.name, 30, y += 35);
