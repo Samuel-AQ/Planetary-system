@@ -1,6 +1,6 @@
 /**
  * @author: Samuel Arrocha Quevedo
- * @version: 04/03/2021
+ * @version: 05/03/2021
  */
 
 CelestialBodyarySystem system;
@@ -38,7 +38,7 @@ void createSystem() {
   CelestialBody odin = new CelestialBody("Odin", width * 0.05, width * 0.55, height / 2, 650, odinTexture);
   CelestialBody ramuh = new CelestialBody("Ramuh", width * 0.06, width * -0.65, height / 2, 750, ramuhTexture);
   CelestialBody carbuncle = new CelestialBody("Carbuncle", width * 0.04, width * 0.75, height / 2, -800, carbuncleTexture);
-  CelestialBody shivaMoon = new CelestialBody("ShivaMoon", width * 0.018, width * -0.97, height / 2, -900, shivaMoonTexture);
+  CelestialBody shivaMoon = new CelestialBody("Mogu", width * 0.018, width * -0.97, height / 2, -900, shivaMoonTexture);
   CelestialBody shiva = new CelestialBody("Shiva", width * 0.045, width * -0.85, height / 2, -900, shivaTexture, shivaMoon);
   CelestialBody leviathan = new CelestialBody("Leviathan", width * 0.05, width * -0.95, height / 2, 950, leviathanTexture);
 
@@ -61,7 +61,6 @@ void draw() {
   updateMovements();
   system.moveCelestialBodies();
 }
-
 
 void showInfo() {
   textSize(20);
@@ -109,6 +108,18 @@ void drawCelestialBodysNames() {
     shape.setStroke(false);
     shape(shape);
     popMatrix();
+    // Moon name if it exists
+    if (CelestialBody.moon != null) {
+      adaptedRadius = CelestialBody.moon.radius * 0.25;
+      text(CelestialBody.moon.name, 30, y += 35);
+      pushMatrix();
+      translate(150, y - 5);
+      shape = createShape(SPHERE, adaptedRadius);
+      shape.setTexture(CelestialBody.moon.texture);
+      shape.setStroke(false);
+      shape(shape);
+      popMatrix();
+    }
   }
 }
 
