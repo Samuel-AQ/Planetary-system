@@ -14,4 +14,4 @@ This application has been developed according to the principles of Jakob Nielsen
 [Processing documentation](https://processing.org/reference/)
 ## Other info
 * Author: Samuel Arrocha Quevedo
-* Version: 04/03/2021
+* Version: 05/03/2021
