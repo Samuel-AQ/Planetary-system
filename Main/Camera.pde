@@ -16,7 +16,7 @@ public class Camera {
   protected void createCameraBody() {
     pushMatrix();
     translate(width / 2, height / 2);
-    shape(camera.body);
+    shape(body);
     popMatrix();
   }
 

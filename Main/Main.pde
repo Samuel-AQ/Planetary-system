@@ -59,6 +59,7 @@ void createSystem() {
 
 void draw() {
   background(backgroundImage);
+  camera.createCameraBody();
   showInfo();
   if (showLegend) drawCelestialBodysNames();
   // Camera control
