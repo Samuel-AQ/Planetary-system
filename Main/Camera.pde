@@ -1,15 +1,23 @@
 public class Camera {
   private float x, y, z;
+  PShape body;
 
   public Camera(float x, float y, float z) {
     this.x = x;
     this.y = y;
     this.z = z;
+    body = createShape(BOX, 20, 20, 20);
   }
 
   protected void runCamera() {
     //ortho(-x, x, -y, y);
     camera();
+  }
+  protected void createCameraBody() {
+    pushMatrix();
+    translate(width / 2, height / 2);
+    shape(camera.body);
+    popMatrix();
   }
 
   protected void increaseX(float value) {
