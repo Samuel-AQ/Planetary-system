@@ -62,12 +62,12 @@ void draw() {
   showInfo();
   if (showLegend) drawCelestialBodysNames();
   // Camera control
-  if (cameraMode){
+  if (cameraMode) {
     camera.runCamera();
   } else {
     perspective();
   }
-  
+
   updateMovements();
   system.moveCelestialBodies();
 }
@@ -158,5 +158,27 @@ void keyPressed() {
   }
   if (keyCode == 'C' || keyCode == 'c') {
     cameraMode = !cameraMode;
+  }
+  
+  // If camera mode is enabled it enables the controls
+  if (cameraMode) {
+    if (keyCode == 'w' || keyCode == 'W') {
+      camera.increaseX(50);
+    }
+    if (keyCode == 'd' || keyCode == 'D') {
+      camera.decreaseX(50);
+    }
+    if (keyCode == 's' || keyCode == 'S') {
+      camera.increaseY(50);
+    }
+    if (keyCode == 'a' || keyCode == 'A') {
+      camera.decreaseY(50);
+    }
+    if (keyCode == 'q' || keyCode == 'Q') {
+      
+    }
+    if (keyCode == 'e' || keyCode == 'E') {
+      
+    }
   }
 }

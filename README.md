@@ -6,8 +6,18 @@ In order to use the application you just have to run the main file. It will show
 * Mouse wheel to adjust the zoom
 * Arrow keys to rotate the whole system
 * Press 'L' to show or hide the legend
+* Press 'C' to activate or deactivate the camera mode
+
+When the camera mode is enabled you can control the spacecraft using this keys: 
+* Press 'w' to move forward
+* Press 'd' to move to the right
+* Press 's' to move backwards
+* Press 'a' to move to the left
+* Press 'c' to exit camera mode
+
 ## Implementation decisions
 This application has been developed according to the principles of Jakob Nielsen. It's easy to use, makes the user feels the control at every moment and uses a minimalist and simple design. It is not possible for the user to generate any programming error so it hasn't been necessary to control the user's movements. The controls are shown at every moment so it's not possible for the user to get lost using the application.
+A camera mode has been added in order to allow the user to navigate through the system freely. This camera is seeing by the user as a little spacecraft if they see it from the normal view mode.
 ## Application demonstration
 ![Example](https://github.com/Samuel-AQ/Planetary-system/blob/master/data/Demonstration/example.gif?raw=true)
 ## References
