@@ -5,6 +5,7 @@
 
 CelestialBodyarySystem system;
 PImage backgroundImage;
+Camera camera;
 float xRotation, yRotation, systemRotation, viewAngle;
 boolean showLegend, cameraMode;
 
@@ -15,6 +16,7 @@ void setup() {
   systemRotation = 0;
   viewAngle = width * -0.9;
   backgroundImage = loadImage("../data/universe-background.jpg");
+  camera = new Camera(width / 2, height / 2, 100);
   showLegend = false;
   cameraMode = false;
   createSystem();
@@ -61,7 +63,7 @@ void draw() {
   if (showLegend) drawCelestialBodysNames();
   // Camera control
   if (cameraMode){
-    runCamera();
+    camera.runCamera();
   } else {
     perspective();
   }
@@ -130,10 +132,6 @@ void drawCelestialBodysNames() {
       popMatrix();
     }
   }
-}
-
-void runCamera() {
-  ortho();
 }
 
 void mouseWheel(MouseEvent event) {
