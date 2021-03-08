@@ -59,7 +59,13 @@ void draw() {
   background(backgroundImage);
   showInfo();
   if (showLegend) drawCelestialBodysNames();
-  if (cameraMode) runCamera();
+  // Camera control
+  if (cameraMode){
+    runCamera();
+  } else {
+    perspective();
+  }
+  
   updateMovements();
   system.moveCelestialBodies();
 }
