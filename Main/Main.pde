@@ -3,7 +3,7 @@
  * @version: 05/03/2021
  */
 
-CelestialBodyarySystem system;
+PlanetarySystem system;
 PImage backgroundImage;
 Camera camera;
 float xRotation, yRotation, systemRotation, viewAngle;
@@ -45,7 +45,7 @@ void createSystem() {
   CelestialBody shiva = new CelestialBody("Shiva", width * 0.045, width * -0.85, height / 2, -900, shivaTexture, shivaMoon);
   CelestialBody leviathan = new CelestialBody("Leviathan", width * 0.05, width * -0.95, height / 2, 950, leviathanTexture);
 
-  system = new CelestialBodyarySystem(ifrit);
+  system = new PlanetarySystem(ifrit);
 
   system.addCelestialBody(sylph);
   system.addCelestialBody(bahamut);
@@ -140,46 +140,62 @@ void mouseWheel(MouseEvent event) {
 }
 
 void keyPressed() {
-  float rotationIncrement = 5;
+  float increment = 5;
 
-  if (keyCode == UP) {
-    xRotation += rotationIncrement;
-  }
-  if (keyCode == DOWN) {
-    xRotation -= rotationIncrement;
-  }
-  if (keyCode == RIGHT) {
-    yRotation += rotationIncrement;
-  }
-  if (keyCode == LEFT) {
-    yRotation -= rotationIncrement;
-  }
   if (keyCode == 'L' || keyCode == 'l') {
     showLegend = !showLegend;
   }
   if (keyCode == 'C' || keyCode == 'c') {
     cameraMode = !cameraMode;
   }
+
+  // This controls are only enabled when not using the camera mode
+  if (!cameraMode) {
+    if (keyCode == UP) {
+      xRotation += increment;
+    }
+    if (keyCode == DOWN) {
+      xRotation -= increment;
+    }
+    if (keyCode == RIGHT) {
+      yRotation += increment;
+    }
+    if (keyCode == LEFT) {
+      yRotation -= increment;
+    }
+  }
   
-  // If camera mode is enabled it enables the controls
-  if (cameraMode) {
-    if (keyCode == 'w' || keyCode == 'W') {
-      camera.increaseX(50);
-    }
-    if (keyCode == 'd' || keyCode == 'D') {
-      camera.decreaseX(50);
-    }
-    if (keyCode == 's' || keyCode == 'S') {
-      camera.increaseY(50);
-    }
-    if (keyCode == 'a' || keyCode == 'A') {
-      camera.decreaseY(50);
-    }
-    if (keyCode == 'q' || keyCode == 'Q') {
-      
-    }
-    if (keyCode == 'e' || keyCode == 'E') {
-      
-    }
+  // Move camera controls
+  if (keyCode == 'w' || keyCode == 'W') {
+    camera.decreaseY(increment);
+  }
+  if (keyCode == 'd' || keyCode == 'D') {
+    camera.increaseX(increment);
+  }
+  if (keyCode == 's' || keyCode == 'S') {
+    camera.increaseY(increment);
+  }
+  if (keyCode == 'a' || keyCode == 'A') {
+    camera.decreaseX(increment);
+  }
+  if (keyCode == 'e' || keyCode == 'E') {
+    camera.decreaseZ(increment);
+  }
+  if (keyCode == 'q' || keyCode == 'Q') {
+    camera.increaseZ(increment);
+  }
+  
+  // Rotate camera controls
+  if (keyCode == 'u' || keyCode == 'U') {
+    camera.decreaseXRotation(increment);
+  }
+  if (keyCode == 'k' || keyCode == 'K') {
+    camera.increaseYRotation(increment);
+  }
+  if (keyCode == 'j' || keyCode == 'J') {
+    camera.decreaseXRotation(increment);
+  }
+  if (keyCode == 'h' || keyCode == 'H') {
+    camera.increaseYRotation(increment);
   }
 }
