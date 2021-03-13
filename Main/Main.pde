@@ -87,16 +87,16 @@ void checkCameraKey() {
 
   switch(cameraKey) {
   case "w":
-    camera.decreaseY(increment);
-    break;
-  case "d":
-    camera.increaseX(increment);
-    break;
-  case "s":
     camera.increaseY(increment);
     break;
-  case "a":
+  case "d":
     camera.decreaseX(increment);
+    break;
+  case "s":
+    camera.decreaseY(increment);
+    break;
+  case "a":
+    camera.increaseX(increment);
     break;
   case "e":
     camera.decreaseZ(increment);
@@ -105,20 +105,16 @@ void checkCameraKey() {
     camera.increaseZ(increment);
     break;
   case "UP":
-    xRotation += increment;
-    camera.updateEyeY(increment);
-    break;
-  case "DOWN":
-    xRotation -= increment;
     camera.updateEyeY(-increment);
     break;
+  case "DOWN":
+    camera.updateEyeY(increment);
+    break;
   case "LEFT":
-    yRotation -= increment;
-    camera.updateEyeX(-increment);
+    camera.updateEyeX(increment);
     break;
   case "RIGHT":
-    yRotation += increment;
-    camera.updateEyeY(increment);
+    camera.updateEyeY(-increment);
     break;
   }
 }

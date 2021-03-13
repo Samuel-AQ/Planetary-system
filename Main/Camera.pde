@@ -18,8 +18,8 @@ public class Camera {
   protected void createCameraBody() {
     pushMatrix();
     translate(centerX, centerY, centerZ);
-    rotateX(radians(mouseY));
-    rotateY(radians(mouseX));
+    rotateX(radians(eyeX));
+    rotateY(radians(eyeY));
     shape(body);
     popMatrix();
   }
