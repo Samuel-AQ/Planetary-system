@@ -17,7 +17,7 @@ void setup() {
   systemRotation = 0;
   viewAngle = width * -0.9;
   backgroundImage = loadImage("../data/universe-background.jpg");
-  camera = new Camera(100);
+  camera = new Camera(-500);
   showLegend = false;
   cameraMode = false;
   createSystem();
@@ -105,11 +105,18 @@ void checkCameraKey() {
 void showInfo() {
   if (!cameraMode) {
     textSize(20);
+    text("· Para mover la nave (w: ascender, d: derecha, s: descender, a: izquierda, e: avanzar y q: retroceder)", 30, height - 150);
     text("· Use la rueda del ratón para ajustar el zoom sobre el sistema", 30, height - 120);
     text("· Pulse las teclas de dirección para rotar el sistema", 30, height - 90);
     text("· Pulse 'L' para mostrar u ocultar la leyenda", 30, height - 60);
     text("· Pulse 'C' para activar el modo cámara", 30, height - 30);
   }
+  //} else {
+  //  textSize(20);
+  //  text("· Para mover la nave (w: ascender, d: derecha, s: descender, a: izquierda, e: avanzar y q: retroceder)", mouseX, mouseY);
+  //  text("· Mueva el cursor del ratón para mover la cámara", 30, height - 60);
+  //  text("· Pulse 'C' para desactivar el modo cámara", 30, height - 30);
+  //}
 }
 
 void updateMovements() {
@@ -167,16 +174,17 @@ void drawCelestialBodysNames() {
 }
 
 void mouseWheel(MouseEvent event) {
-  viewAngle -= event.getCount() * 50;
+  if(!cameraMode) viewAngle -= event.getCount() * 50;
 }
 
 void keyPressed() {
   float increment = 5;
 
-  if (keyCode == 'L' || keyCode == 'l') {
+  if (!cameraMode && keyCode == 'L' || keyCode == 'l') {
     showLegend = !showLegend;
   }
   if (keyCode == 'C' || keyCode == 'c') {
+    showLegend = false;
     cameraMode = !cameraMode;
   }
 
@@ -193,6 +201,19 @@ void keyPressed() {
     }
     if (keyCode == LEFT) {
       yRotation -= increment;
+    }
+  } else {
+    if (keyCode == UP) {
+      camera.updateEyeY(5);
+    }
+    if (keyCode == DOWN) {
+      camera.updateEyeY(-5);
+    }
+    if (keyCode == RIGHT) {
+      camera.updateEyeX(5);
+    }
+    if (keyCode == LEFT) {
+      camera.updateEyeX(-5);
     }
   }
 

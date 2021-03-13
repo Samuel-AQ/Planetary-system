@@ -1,18 +1,18 @@
 public class Camera {
-  private float z, centerX, centerY, centerZ;
+  private float eyeX, eyeY, centerX, centerY, centerZ;
   PShape body;
 
   public Camera(float z) {
-    this.z = z;
     centerX = width / 2;
     centerY = height / 2;
-    centerZ = 0;
+    centerZ = z;
+    eyeX = centerX;
+    eyeY = centerY;
     body = createShape(BOX, 10, 10, 10);
   }
 
   protected void runCamera() {
-    camera(mouseX, mouseY, z, centerX, centerY, centerZ, 0, 1, 0);
-    println("x:" + mouseX + " y: " + mouseY);
+    camera(eyeX, eyeY, centerZ, centerX, centerY, centerZ, 0, 1, 0);
   }
 
   protected void createCameraBody() {
@@ -46,5 +46,13 @@ public class Camera {
 
   protected void decreaseZ(float value) {
     centerZ -= value;
+  }
+  
+  protected void updateEyeX(float value){
+    eyeX += value;
+  }
+  
+  protected void updateEyeY(float value){
+    eyeY += value;
   }
 }

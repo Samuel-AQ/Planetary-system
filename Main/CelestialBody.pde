@@ -60,6 +60,6 @@ public class CelestialBody {
 
   private void updateAngle() {
     if (angle > 360) angle -= 360;
-    rotateY(radians(angle += 1));
+    rotateY(radians(angle++));
   }
 }
