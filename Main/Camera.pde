@@ -3,16 +3,16 @@ public class Camera {
   PShape body;
 
   public Camera(float z) {
-    centerX = width / 2;
-    centerY = height / 2;
+    centerX = 0;
+    centerY = 0;
     centerZ = z;
-    eyeX = centerX;
-    eyeY = centerY;
+    eyeX = 0;
+    eyeY = 0;
     body = createShape(BOX, 10, 10, 10);
   }
 
   protected void runCamera() {
-    camera(eyeX, eyeY, centerZ, centerX, centerY, centerZ, 0, 1, 0);
+    camera(centerX, centerY, centerZ, eyeX, eyeY, 0, 0, 1, 0);
   }
 
   protected void createCameraBody() {

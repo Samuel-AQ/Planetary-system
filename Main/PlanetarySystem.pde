@@ -28,8 +28,7 @@ public class PlanetarySystem {
   private void updateStar() {
     pushMatrix();
     translate(star.x, star.y, star.z);
-    if (star.angle > 360) star.angle -= 360;
-    rotateY(radians(star.angle++));
+    star.updateAngle();
     star.shape = createShape(SPHERE, star.radius);
     star.shape.setTexture(star.texture);
     star.shape.setStroke(false);

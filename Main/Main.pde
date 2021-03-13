@@ -1,14 +1,18 @@
 /**
  * @author: Samuel Arrocha Quevedo
- * @version: 05/03/2021
+ * @version: 13/03/2021
  */
+ 
+ //TODO:
+ //- transform arrow buttons control to string
+ //- camera control refactor
 
 PlanetarySystem system;
 PImage backgroundImage;
 Camera camera;
 float xRotation, yRotation, systemRotation, viewAngle;
 boolean showLegend, cameraMode;
-char cameraKey;
+String cameraKey;
 
 void setup() {
   size(1000, 1000, P3D);
@@ -17,9 +21,10 @@ void setup() {
   systemRotation = 0;
   viewAngle = width * -0.9;
   backgroundImage = loadImage("../data/universe-background.jpg");
-  camera = new Camera(-500);
-  showLegend = false;
+  camera = new Camera(height / 2);
+  showLegend = true;
   cameraMode = false;
+  cameraKey = "";
   createSystem();
 }
 
@@ -62,9 +67,9 @@ void draw() {
   background(backgroundImage);
   checkCameraKey();
   showInfo();
-  
+
   if (showLegend) drawCelestialBodysNames();
-  
+
   // Camera control
   if (cameraMode) {
     camera.runCamera();
@@ -81,23 +86,39 @@ void checkCameraKey() {
   float increment = 5;
 
   switch(cameraKey) {
-  case 'w':
+  case "w":
     camera.decreaseY(increment);
     break;
-  case 'd':
+  case "d":
     camera.increaseX(increment);
     break;
-  case 's':
+  case "s":
     camera.increaseY(increment);
     break;
-  case 'a':
+  case "a":
     camera.decreaseX(increment);
     break;
-  case 'e':
+  case "e":
     camera.decreaseZ(increment);
     break;
-  case 'q':
+  case "q":
     camera.increaseZ(increment);
+    break;
+  case "UP":
+    xRotation += increment;
+    camera.updateEyeY(increment);
+    break;
+  case "DOWN":
+    xRotation -= increment;
+    camera.updateEyeY(-increment);
+    break;
+  case "LEFT":
+    yRotation -= increment;
+    camera.updateEyeX(-increment);
+    break;
+  case "RIGHT":
+    yRotation += increment;
+    camera.updateEyeY(increment);
     break;
   }
 }
@@ -111,12 +132,6 @@ void showInfo() {
     text("· Pulse 'L' para mostrar u ocultar la leyenda", 30, height - 60);
     text("· Pulse 'C' para activar el modo cámara", 30, height - 30);
   }
-  //} else {
-  //  textSize(20);
-  //  text("· Para mover la nave (w: ascender, d: derecha, s: descender, a: izquierda, e: avanzar y q: retroceder)", mouseX, mouseY);
-  //  text("· Mueva el cursor del ratón para mover la cámara", 30, height - 60);
-  //  text("· Pulse 'C' para desactivar el modo cámara", 30, height - 30);
-  //}
 }
 
 void updateMovements() {
@@ -174,11 +189,11 @@ void drawCelestialBodysNames() {
 }
 
 void mouseWheel(MouseEvent event) {
-  if(!cameraMode) viewAngle -= event.getCount() * 50;
+  if (!cameraMode) viewAngle -= event.getCount() * 50;
 }
 
 void keyPressed() {
-  float increment = 5;
+  //float increment = 5;
 
   if (!cameraMode && keyCode == 'L' || keyCode == 'l') {
     showLegend = !showLegend;
@@ -187,44 +202,19 @@ void keyPressed() {
     showLegend = false;
     cameraMode = !cameraMode;
   }
-
-  // This controls are only enabled when not using the camera mode
-  if (!cameraMode) {
-    if (keyCode == UP) {
-      xRotation += increment;
-    }
-    if (keyCode == DOWN) {
-      xRotation -= increment;
-    }
-    if (keyCode == RIGHT) {
-      yRotation += increment;
-    }
-    if (keyCode == LEFT) {
-      yRotation -= increment;
-    }
-  } else {
-    if (keyCode == UP) {
-      camera.updateEyeY(5);
-    }
-    if (keyCode == DOWN) {
-      camera.updateEyeY(-5);
-    }
-    if (keyCode == RIGHT) {
-      camera.updateEyeX(5);
-    }
-    if (keyCode == LEFT) {
-      camera.updateEyeX(-5);
-    }
-  }
-
+  
   boolean someCameraKeyIsPressed = keyCode == 'w' || keyCode == 'W' ||
     keyCode == 'd' || keyCode == 'D' ||
     keyCode == 's' || keyCode == 'S' ||
     keyCode == 'a' || keyCode == 'A' ||
     keyCode == 'e' || keyCode == 'E' ||
     keyCode == 'q' || keyCode == 'Q';
-    
-  if (someCameraKeyIsPressed) cameraKey = key;
+
+  if (someCameraKeyIsPressed) cameraKey = key + "";
+  if (keyCode == UP) cameraKey = "UP";
+  if (keyCode == DOWN) cameraKey = "DOWN";
+  if (keyCode == LEFT) cameraKey = "LEFT";
+  if (keyCode == RIGHT) cameraKey = "RIGHT";
 }
 
 void keyReleased() {
@@ -233,7 +223,9 @@ void keyReleased() {
     keyCode == 's' || keyCode == 'S' ||
     keyCode == 'a' || keyCode == 'A' ||
     keyCode == 'e' || keyCode == 'E' ||
-    keyCode == 'q' || keyCode == 'Q';
-    
-  if (someCameraKeyIsReleased) cameraKey = '0';
+    keyCode == 'q' || keyCode == 'Q' ||
+    keyCode == UP || keyCode == DOWN ||
+    keyCode == LEFT || keyCode == RIGHT;
+
+  if (someCameraKeyIsReleased) cameraKey = "";
 }
