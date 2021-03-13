@@ -11,7 +11,7 @@ public class Camera {
   }
 
   protected void runCamera() {
-    camera(mouseX, mouseY, z - 50, centerX, centerY, centerZ, 0, 1, 0);
+    camera(mouseX, mouseY, z, centerX, centerY, centerZ, 0, 1, 0);
     println("x:" + mouseX + " y: " + mouseY);
   }
 
