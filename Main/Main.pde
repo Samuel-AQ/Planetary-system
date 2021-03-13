@@ -8,6 +8,7 @@ PImage backgroundImage;
 Camera camera;
 float xRotation, yRotation, systemRotation, viewAngle;
 boolean showLegend, cameraMode;
+char cameraKey;
 
 void setup() {
   size(1000, 1000, P3D);
@@ -16,7 +17,7 @@ void setup() {
   systemRotation = 0;
   viewAngle = width * -0.9;
   backgroundImage = loadImage("../data/universe-background.jpg");
-  camera = new Camera(width / 2, height / 2, 100);
+  camera = new Camera(100);
   showLegend = false;
   cameraMode = false;
   createSystem();
@@ -59,26 +60,56 @@ void createSystem() {
 
 void draw() {
   background(backgroundImage);
-  camera.createCameraBody();
+  checkCameraKey();
   showInfo();
+  
   if (showLegend) drawCelestialBodysNames();
+  
   // Camera control
   if (cameraMode) {
     camera.runCamera();
   } else {
-    perspective();
+    camera.createCameraBody();
+    camera();
   }
 
   updateMovements();
   system.moveCelestialBodies();
 }
 
+void checkCameraKey() {
+  float increment = 5;
+
+  switch(cameraKey) {
+  case 'w':
+    camera.decreaseY(increment);
+    break;
+  case 'd':
+    camera.increaseX(increment);
+    break;
+  case 's':
+    camera.increaseY(increment);
+    break;
+  case 'a':
+    camera.decreaseX(increment);
+    break;
+  case 'e':
+    camera.decreaseZ(increment);
+    break;
+  case 'q':
+    camera.increaseZ(increment);
+    break;
+  }
+}
+
 void showInfo() {
-  textSize(20);
-  text("· Use la rueda del ratón para ajustar el zoom sobre el sistema", 30, height - 120);
-  text("· Pulse las teclas de dirección para rotar el sistema", 30, height - 90);
-  text("· Pulse 'L' para mostrar u ocultar la leyenda", 30, height - 60);
-  text("· Pulse 'C' para activar el modo cámara", 30, height - 30);
+  if (!cameraMode) {
+    textSize(20);
+    text("· Use la rueda del ratón para ajustar el zoom sobre el sistema", 30, height - 120);
+    text("· Pulse las teclas de dirección para rotar el sistema", 30, height - 90);
+    text("· Pulse 'L' para mostrar u ocultar la leyenda", 30, height - 60);
+    text("· Pulse 'C' para activar el modo cámara", 30, height - 30);
+  }
 }
 
 void updateMovements() {
@@ -164,38 +195,24 @@ void keyPressed() {
       yRotation -= increment;
     }
   }
-  
-  // Move camera controls
-  if (keyCode == 'w' || keyCode == 'W') {
-    camera.decreaseY(increment);
-  }
-  if (keyCode == 'd' || keyCode == 'D') {
-    camera.increaseX(increment);
-  }
-  if (keyCode == 's' || keyCode == 'S') {
-    camera.increaseY(increment);
-  }
-  if (keyCode == 'a' || keyCode == 'A') {
-    camera.decreaseX(increment);
-  }
-  if (keyCode == 'e' || keyCode == 'E') {
-    camera.decreaseZ(increment);
-  }
-  if (keyCode == 'q' || keyCode == 'Q') {
-    camera.increaseZ(increment);
-  }
-  
-  // Rotate camera controls
-  if (keyCode == 'u' || keyCode == 'U') {
-    camera.decreaseXRotation(increment);
-  }
-  if (keyCode == 'k' || keyCode == 'K') {
-    camera.increaseYRotation(increment);
-  }
-  if (keyCode == 'j' || keyCode == 'J') {
-    camera.decreaseXRotation(increment);
-  }
-  if (keyCode == 'h' || keyCode == 'H') {
-    camera.increaseYRotation(increment);
-  }
+
+  boolean someCameraKeyIsPressed = keyCode == 'w' || keyCode == 'W' ||
+    keyCode == 'd' || keyCode == 'D' ||
+    keyCode == 's' || keyCode == 'S' ||
+    keyCode == 'a' || keyCode == 'A' ||
+    keyCode == 'e' || keyCode == 'E' ||
+    keyCode == 'q' || keyCode == 'Q';
+    
+  if (someCameraKeyIsPressed) cameraKey = key;
+}
+
+void keyReleased() {
+  boolean someCameraKeyIsReleased = keyCode == 'w' || keyCode == 'W' ||
+    keyCode == 'd' || keyCode == 'D' ||
+    keyCode == 's' || keyCode == 'S' ||
+    keyCode == 'a' || keyCode == 'A' ||
+    keyCode == 'e' || keyCode == 'E' ||
+    keyCode == 'q' || keyCode == 'Q';
+    
+  if (someCameraKeyIsReleased) cameraKey = '0';
 }
