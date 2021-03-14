@@ -1,7 +1,7 @@
 public class Camera {
   private float eyeX, eyeY, centerX, centerY, centerZ;
-  PShape body;
-  PImage spacecraftTexture;
+  private PShape body;
+  private PImage spacecraftTexture;
 
   public Camera(float z) {
     centerX = width / 2;
@@ -10,7 +10,7 @@ public class Camera {
     eyeX = 510;
     eyeY = 480;
     body = createShape(BOX, 10, 10, 10);
-    spacecraftTexture = loadImage("..data/textures/spacecraft-texture.jpg");
+    spacecraftTexture = loadImage("../data/textures/spacecraft-texture.jpg");
   }
 
   protected void runCamera() {
@@ -22,7 +22,7 @@ public class Camera {
     pushMatrix();
     translate(centerX, centerY, centerZ);
     rotateX(radians(eyeY));
-    rotateY(radians(-eyeX));
+    rotateY(radians(eyeX));
     body.setTexture(spacecraftTexture);
     shape(body);
     popMatrix();
