@@ -1,10 +1,10 @@
 public class CelestialBody {
-  String name;
-  float x, y, z;
-  CelestialBody moon;
-  float radius, angle;
-  PImage texture;
-  PShape shape;
+  private String name;
+  private float x, y, z;
+  private CelestialBody moon;
+  private float radius, angle;
+  private PImage texture;
+  private PShape shape;
 
   public CelestialBody(String name, float radius, float x, float y, float z, PImage texture) {
     this.name = name;

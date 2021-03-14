@@ -1,7 +1,7 @@
 public class PlanetarySystem {
 
-  ArrayList<CelestialBody> CelestialBodies;
-  CelestialBody star;
+  private ArrayList<CelestialBody> CelestialBodies;
+  private CelestialBody star;
 
   public PlanetarySystem(CelestialBody star) {
     this.star = star;

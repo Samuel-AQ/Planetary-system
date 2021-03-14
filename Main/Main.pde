@@ -1,18 +1,13 @@
 /**
  * @author: Samuel Arrocha Quevedo
- * @version: 13/03/2021
+ * @version: 14/03/2021
  */
- 
- //TODO:
- //- camera control refactor
- // fix camera controls
- // fix spacecraft
 
 PlanetarySystem system;
 PImage backgroundImage;
 Camera camera;
 float xRotation, yRotation, systemRotation, viewAngle;
-boolean showLegend, cameraMode;
+boolean showLegend, cameraMode, showInfoScreen, showIntroScreen;
 String cameraKey;
 
 void setup() {
@@ -25,7 +20,10 @@ void setup() {
   camera = new Camera(height / 1.5);
   showLegend = false;
   cameraMode = false;
+  showInfoScreen = false;
+  showIntroScreen = true;
   cameraKey = "";
+  
   createSystem();
 }
 
@@ -65,22 +63,47 @@ void createSystem() {
 }
 
 void draw() {
-  background(backgroundImage);
-  checkCameraKey();
-  showInfo();
-
-  if (showLegend) drawCelestialBodysNames();
-
-  // Camera control
-  if (cameraMode) {
-    camera.runCamera();
+  if (showIntroScreen) {
+    showIntro();
+  } else if (showInfoScreen && !showIntroScreen) {
+    showInfo();
   } else {
-    camera.createCameraBody();
-    camera();
-  }
+    background(backgroundImage);
 
-  updateMovements();
-  system.moveCelestialBodies();
+    // Legend control
+    if (showLegend && !showIntroScreen && !showInfoScreen) drawCelestialBodysNames();
+
+    // Camera control
+    checkCameraKey();
+    if (cameraMode) {
+      camera.runCamera();
+      showLegend = false;
+    } else {
+      textSize(20);
+      textAlign(CENTER);
+      text("· Pulse 'I' para acceder a la ayuda", width / 2, height - 30);
+      camera.createCameraBody();
+      camera();
+    }
+
+    // System management
+    updateMovements();
+    system.moveCelestialBodies();
+  }
+}
+
+void showIntro() {
+  color black = color(0);
+  String title = "Bienvenido al sistema \n planetario Eidolon";
+  String startControlText = "Pulse 'enter' para comenzar";
+  PImage systemImage = loadImage("../data/intro-image.png");
+  background(black);
+  textAlign(CENTER);
+  textSize(50);
+  text(title, width / 2, height * 0.1);
+  image(systemImage, width * 0.18, height * 0.25);
+  textSize(40);
+  text(startControlText, width / 2, height * 0.9);
 }
 
 void checkCameraKey() {
@@ -121,14 +144,29 @@ void checkCameraKey() {
 }
 
 void showInfo() {
-  if (!cameraMode) {
-    textSize(20);
-    text("· Para mover la nave (w: ascender, d: derecha, s: descender, a: izquierda, e: avanzar y q: retroceder)", 30, height - 150);
-    text("· Use la rueda del ratón para ajustar el zoom sobre el sistema", 30, height - 120);
-    text("· Pulse las teclas de dirección para rotar el sistema", 30, height - 90);
-    text("· Pulse 'L' para mostrar u ocultar la leyenda", 30, height - 60);
-    text("· Pulse 'C' para activar el modo cámara", 30, height - 30);
-  }
+  color black = color(0);
+  String cameraControls  = "· Para mover la nave (w: ascender, d: derecha, s: descender,\n" +
+    "  a: izquierda, e: avanzar y q: retroceder)\n" +
+    "· Pulse las teclas de dirección para rotar la cámara";
+
+  String normalControls = "· Use la rueda del ratón para ajustar el zoom sobre el sistema\n" +
+    "· Pulse 'L' para mostrar u ocultar la leyenda \n" +
+    "· Pulse 'C' para activar el modo cámara \n" +
+    "· Pulse 'I' para salir del manual";
+
+  background(black);
+  textAlign(CENTER);
+  textSize(50);
+
+  text("MANUAL DEL SISTEMA", width / 2, height * 0.25);
+  textSize(40);
+  text("Controles de la nave", width / 2, height * 0.35);
+  textSize(20);
+  text(cameraControls, width / 2, height * 0.4);
+  textSize(40);
+  text("Controles del sistema", width / 2, height * 0.55);
+  textSize(20);
+  text(normalControls, width / 2, height * 0.6);
 }
 
 void updateMovements() {
@@ -145,8 +183,10 @@ void updateMovements() {
 
 void drawCelestialBodysNames() {
   float y = height * 0.005;
-
+  
   textSize(20);
+  textAlign(LEFT);
+  
   // Star name
   CelestialBody star = system.star;
   float adaptedRadius = star.radius * 0.08;
@@ -190,24 +230,25 @@ void mouseWheel(MouseEvent event) {
 }
 
 void keyPressed() {
-  //float increment = 5;
-
+  if (keyCode == ENTER) showIntroScreen = false;
+  
   if (!cameraMode && keyCode == 'L' || keyCode == 'l') {
     showLegend = !showLegend;
   }
+  
   if (keyCode == 'C' || keyCode == 'c') {
-    showLegend = false;
     cameraMode = !cameraMode;
   }
   
-  boolean someCameraKeyIsPressed = keyCode == 'w' || keyCode == 'W' ||
-    keyCode == 'd' || keyCode == 'D' ||
-    keyCode == 's' || keyCode == 'S' ||
-    keyCode == 'a' || keyCode == 'A' ||
-    keyCode == 'e' || keyCode == 'E' ||
-    keyCode == 'q' || keyCode == 'Q';
-
-  if (someCameraKeyIsPressed) cameraKey = key + "";
+  if (keyCode == 'i' || keyCode == 'I') showInfoScreen = !showInfoScreen;
+  
+  // Camera controls
+  if (keyCode == 'w' || keyCode == 'W') cameraKey = "w";
+  if (keyCode == 'd' || keyCode == 'D') cameraKey = "d";
+  if (keyCode == 's' || keyCode == 'S') cameraKey = "s";
+  if (keyCode == 'a' || keyCode == 'A') cameraKey = "a";
+  if (keyCode == 'e' || keyCode == 'E') cameraKey = "e";
+  if (keyCode == 'q' || keyCode == 'Q') cameraKey = "q";
   if (keyCode == UP) cameraKey = "UP";
   if (keyCode == DOWN) cameraKey = "DOWN";
   if (keyCode == LEFT) cameraKey = "LEFT";
