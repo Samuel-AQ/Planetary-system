@@ -106,16 +106,16 @@ void checkCameraKey() {
     camera.increaseZ(increment);
     break;
   case "UP":
-    camera.updateEyeY(-increment);
+    camera.decreaseEyeY(increment);
     break;
   case "DOWN":
-    camera.updateEyeY(increment);
+    camera.increaseEyeY(increment);
     break;
   case "LEFT":
-    camera.updateEyeX(-increment);
+    camera.decreaseEyeX(increment);
     break;
   case "RIGHT":
-    camera.updateEyeX(increment);
+    camera.increaseEyeX(increment);
     break;
   }
 }

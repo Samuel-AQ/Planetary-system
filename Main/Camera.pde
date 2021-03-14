@@ -18,7 +18,6 @@ public class Camera {
   }
 
   protected void createCameraBody() {
-    
     pushMatrix();
     translate(centerX, centerY, centerZ);
     rotateX(radians(eyeY));
@@ -52,11 +51,19 @@ public class Camera {
     centerZ -= value;
   }
   
-  protected void updateEyeX(float value){
+  protected void increaseEyeX(float value){
     eyeX += value;
   }
   
-  protected void updateEyeY(float value){
+  protected void decreaseEyeX(float value){
+    eyeX -= value;
+  }
+  
+  protected void increaseEyeY(float value){
     eyeY += value;
+  }
+  
+  protected void decreaseEyeY(float value){
+    eyeY -= value;
   }
 }
