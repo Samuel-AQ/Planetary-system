@@ -4,8 +4,9 @@
  */
  
  //TODO:
- //- transform arrow buttons control to string
  //- camera control refactor
+ // fix camera controls
+ // fix spacecraft
 
 PlanetarySystem system;
 PImage backgroundImage;
@@ -21,8 +22,8 @@ void setup() {
   systemRotation = 0;
   viewAngle = width * -0.9;
   backgroundImage = loadImage("../data/universe-background.jpg");
-  camera = new Camera(height / 2);
-  showLegend = true;
+  camera = new Camera(height / 1.5);
+  showLegend = false;
   cameraMode = false;
   cameraKey = "";
   createSystem();
@@ -87,16 +88,16 @@ void checkCameraKey() {
 
   switch(cameraKey) {
   case "w":
-    camera.increaseY(increment);
-    break;
-  case "d":
-    camera.decreaseX(increment);
-    break;
-  case "s":
     camera.decreaseY(increment);
     break;
-  case "a":
+  case "d":
     camera.increaseX(increment);
+    break;
+  case "s":
+    camera.increaseY(increment);
+    break;
+  case "a":
+    camera.decreaseX(increment);
     break;
   case "e":
     camera.decreaseZ(increment);
@@ -111,10 +112,10 @@ void checkCameraKey() {
     camera.updateEyeY(increment);
     break;
   case "LEFT":
-    camera.updateEyeX(increment);
+    camera.updateEyeX(-increment);
     break;
   case "RIGHT":
-    camera.updateEyeY(-increment);
+    camera.updateEyeX(increment);
     break;
   }
 }

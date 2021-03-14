@@ -3,11 +3,11 @@ public class Camera {
   PShape body;
 
   public Camera(float z) {
-    centerX = 0;
-    centerY = 0;
+    centerX = width / 2;
+    centerY = height / 2;
     centerZ = z;
-    eyeX = 0;
-    eyeY = 0;
+    eyeX = 510;
+    eyeY = 480;
     body = createShape(BOX, 10, 10, 10);
   }
 
@@ -18,8 +18,8 @@ public class Camera {
   protected void createCameraBody() {
     pushMatrix();
     translate(centerX, centerY, centerZ);
-    rotateX(radians(eyeX));
-    rotateY(radians(eyeY));
+    rotateX(radians(eyeY));
+    rotateY(radians(-eyeX));
     shape(body);
     popMatrix();
   }
