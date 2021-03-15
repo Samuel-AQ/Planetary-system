@@ -6,6 +6,7 @@ In order to use the application you just have to run the main file. It will show
 * Mouse wheel to adjust the zoom
 * Press 'L' to show or hide the legend
 * Press 'C' to activate or deactivate the camera mode
+* Press 'R' to reset the application
 * Press 'I' to open the help
 
 When the camera mode is enabled you can control the spacecraft using this keys: 

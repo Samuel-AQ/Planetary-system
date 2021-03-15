@@ -23,7 +23,7 @@ void setup() {
   showInfoScreen = false;
   showIntroScreen = true;
   cameraKey = "";
-  
+
   createSystem();
 }
 
@@ -152,6 +152,7 @@ void showInfo() {
   String normalControls = "· Use la rueda del ratón para ajustar el zoom sobre el sistema\n" +
     "· Pulse 'L' para mostrar u ocultar la leyenda \n" +
     "· Pulse 'C' para activar el modo cámara \n" +
+    "· Pulse 'R' para reiniciar la aplicación \n" +
     "· Pulse 'I' para salir del manual";
 
   background(black);
@@ -183,10 +184,10 @@ void updateMovements() {
 
 void drawCelestialBodysNames() {
   float y = height * 0.005;
-  
+
   textSize(20);
   textAlign(LEFT);
-  
+
   // Star name
   CelestialBody star = system.star;
   float adaptedRadius = star.radius * 0.08;
@@ -231,17 +232,15 @@ void mouseWheel(MouseEvent event) {
 
 void keyPressed() {
   if (keyCode == ENTER) showIntroScreen = false;
-  
-  if (!cameraMode && keyCode == 'L' || keyCode == 'l') {
-    showLegend = !showLegend;
-  }
-  
-  if (keyCode == 'C' || keyCode == 'c') {
-    cameraMode = !cameraMode;
-  }
-  
+
+  if (!cameraMode && keyCode == 'L' || keyCode == 'l') showLegend = !showLegend;
+
+  if (keyCode == 'C' || keyCode == 'c') cameraMode = !cameraMode;
+
+  if (keyCode == 'R' || keyCode == 'r') setup();
+
   if (keyCode == 'i' || keyCode == 'I') showInfoScreen = !showInfoScreen;
-  
+
   // Camera controls
   if (keyCode == 'w' || keyCode == 'W') cameraKey = "w";
   if (keyCode == 'd' || keyCode == 'D') cameraKey = "d";
