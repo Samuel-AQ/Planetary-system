@@ -237,7 +237,10 @@ void keyPressed() {
 
   if (keyCode == 'C' || keyCode == 'c') cameraMode = !cameraMode;
 
-  if (keyCode == 'R' || keyCode == 'r') setup();
+  if (keyCode == 'R' || keyCode == 'r') {
+    camera();
+    setup();
+  } 
 
   if (keyCode == 'i' || keyCode == 'I') showInfoScreen = !showInfoScreen;
 
