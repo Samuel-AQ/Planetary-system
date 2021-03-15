@@ -90,8 +90,6 @@ void draw() {
     updateMovements();
     system.moveCelestialBodies();
   }
-  
-  saveFrame("../data/frames/file_####.jpg");
 }
 
 void showIntro() {
