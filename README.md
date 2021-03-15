@@ -23,7 +23,7 @@ This application has been developed according to the principles of Jakob Nielsen
 A camera mode has been added in order to allow the user to navigate through the system freely. This camera is seeing by the user as a little spacecraft if they see it from the normal view mode.
 A 3D spacecraft model was used in the beginning, but it was discarded because of optimization decisitions.
 ## Application demonstration
-![Example](https://github.com/Samuel-AQ/Planetary-system/blob/master/data/Demonstration/example.gif?raw=true)
+![Example](https://github.com/Samuel-AQ/Planetary-system/blob/develop/data/Demonstration/example.gif?raw=true)
 ## References
 [Processing documentation](https://processing.org/reference/)
 ## Other info
