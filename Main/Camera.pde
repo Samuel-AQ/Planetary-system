@@ -10,6 +10,7 @@ public class Camera {
     eyeX = 510;
     eyeY = 480;
     body = createShape(BOX, 10, 10, 10);
+    //body = loadShape("../data/3d_models/ufo.obj");
     spacecraftTexture = loadImage("../data/textures/spacecraft-texture.jpg");
   }
 
