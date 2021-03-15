@@ -9,12 +9,14 @@ In order to use the application you just have to run the main file. It will show
 * Press 'I' to open the help
 
 When the camera mode is enabled you can control the spacecraft using this keys: 
-* Press 'w' to move forward
+* Press 'w' to move up
 * Press 'd' to move to the right
-* Press 's' to move backwards
+* Press 's' to move down
 * Press 'a' to move to the left
-* Press 'c' to exit camera mode
+* Press 'e' to move forward
+* Press 'q' to move backwards
 * Press the arrow keys to rotate the camera
+* Press 'C' to exit camera mode
 
 ## Implementation decisions
 This application has been developed according to the principles of Jakob Nielsen. It's easy to use, makes the user feels the control at every moment and uses a minimalist and simple design. It is not possible for the user to generate any programming error so it hasn't been necessary to control the user's movements. The controls are at hand at every moment so it's not possible for the user to get lost using the application.
